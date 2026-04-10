@@ -1,0 +1,494 @@
+/*
+ * Controlled Growth Theme
+ * Dark terminal/cyber aesthetic with neon accents
+ * https://github.com/tcmberg/controlled-growth-theme
+ *
+ * Usage: @import 'controlled-growth.css';
+ *        Add class="cg-theme" to your <body> or root container.
+ */
+
+/* ============================================================
+   1. CSS Custom Properties (Design Tokens)
+   ============================================================ */
+
+:root {
+  /* --- Brand Accents --- */
+  --cg-cyan:        #00ffc8;
+  --cg-green:       #00ff41;
+  --cg-lime:        #39ff14;
+  --cg-pink:        #ff0066;
+  --cg-orange:      #ffa000;
+  --cg-purple:      #bf5fff;
+  --cg-yellow:      #FBBF24;
+
+  /* --- Backgrounds (darkest → lightest) --- */
+  --cg-bg-deep:     #060611;
+  --cg-bg:          #0a0a1a;
+  --cg-bg-alt:      #0a0e1d;
+  --cg-bg-panel:    #0d1117;
+  --cg-bg-card:     #1a1a1a;
+  --cg-bg-nested:   #111111;
+
+  /* --- Text (brightest → dimmest) --- */
+  --cg-text:        #cdd6f4;
+  --cg-text-bright: #e8e6e3;
+  --cg-text-mid:    #aaaaaa;
+  --cg-text-dim:    #888888;
+  --cg-text-muted:  #666666;
+  --cg-text-faint:  #555555;
+  --cg-text-ghost:  #444444;
+
+  /* --- Borders & Dividers --- */
+  --cg-border:      #333333;
+  --cg-border-dim:  #222222;
+
+  /* --- Semantic Colors --- */
+  --cg-success:     #3ecf6a;
+  --cg-warning:     #FBBF24;
+  --cg-error:       #ef4444;
+  --cg-support:     var(--cg-green);
+  --cg-oppose:      var(--cg-pink);
+  --cg-unsure:      var(--cg-orange);
+
+  /* --- Entity Type Colors --- */
+  --cg-entity-component:  var(--cg-cyan);
+  --cg-entity-person:     var(--cg-pink);
+  --cg-entity-concept:    var(--cg-lime);
+  --cg-entity-org:        var(--cg-orange);
+
+  /* --- Typography --- */
+  --cg-font:        'Courier New', 'Fira Code', monospace;
+  --cg-font-size:   12px;
+  --cg-line-height: 1.8;
+
+  /* --- Spacing --- */
+  --cg-space-xs:    4px;
+  --cg-space-sm:    8px;
+  --cg-space-md:    12px;
+  --cg-space-lg:    16px;
+  --cg-space-xl:    20px;
+
+  /* --- Border Radius --- */
+  --cg-radius-sharp:   2px;
+  --cg-radius-sm:      4px;
+  --cg-radius-md:      6px;
+  --cg-radius-lg:      8px;
+  --cg-radius-pill:    9999px;
+
+  /* --- Transitions --- */
+  --cg-transition:  all 0.3s ease;
+
+  /* --- Shadows & Glows --- */
+  --cg-glow-cyan:   0 0 10px #00ffc844;
+  --cg-glow-green:  0 0 10px #00ff4144;
+  --cg-glow-pink:   0 0 10px #ff006644;
+  --cg-glow-orange: 0 0 10px #ffa00044;
+  --cg-shadow:      0 0 20px #00ffc811, inset 0 0 30px #00ffc805;
+}
+
+
+/* ============================================================
+   2. Base Styles
+   ============================================================ */
+
+.cg-theme {
+  background: var(--cg-bg-deep);
+  color: var(--cg-text);
+  font-family: var(--cg-font);
+  font-size: var(--cg-font-size);
+  line-height: var(--cg-line-height);
+  -webkit-font-smoothing: antialiased;
+}
+
+.cg-theme *,
+.cg-theme *::before,
+.cg-theme *::after {
+  box-sizing: border-box;
+}
+
+.cg-theme ::selection {
+  background: rgba(0, 255, 200, 0.25);
+  color: #fff;
+}
+
+
+/* ============================================================
+   3. Typography
+   ============================================================ */
+
+.cg-title {
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cg-cyan);
+  text-shadow: var(--cg-glow-cyan);
+}
+
+.cg-section-label {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cg-text-dim);
+}
+
+.cg-text-cyan   { color: var(--cg-cyan); }
+.cg-text-green  { color: var(--cg-green); }
+.cg-text-pink   { color: var(--cg-pink); }
+.cg-text-orange { color: var(--cg-orange); }
+.cg-text-purple { color: var(--cg-purple); }
+.cg-text-dim    { color: var(--cg-text-dim); }
+.cg-text-muted  { color: var(--cg-text-muted); }
+
+.cg-glow-cyan   { text-shadow: 0 0 10px #00ffc8; }
+.cg-glow-green  { text-shadow: 0 0 10px #00ff41; }
+.cg-glow-pink   { text-shadow: 0 0 10px #ff0066; }
+
+
+/* ============================================================
+   4. Panels & Cards
+   ============================================================ */
+
+.cg-panel {
+  background: var(--cg-bg);
+  border: 1px solid rgba(0, 255, 200, 0.22);
+  border-radius: var(--cg-radius-sharp);
+  padding: var(--cg-space-md);
+  transition: var(--cg-transition);
+}
+
+.cg-panel-glow {
+  box-shadow: var(--cg-shadow);
+}
+
+.cg-card {
+  background: var(--cg-bg-card);
+  border: 1px solid var(--cg-border);
+  border-radius: var(--cg-radius-sm);
+  padding: var(--cg-space-md);
+}
+
+.cg-card-accent {
+  border-left: 3px solid var(--cg-cyan);
+}
+
+.cg-card-accent--pink   { border-left-color: var(--cg-pink); }
+.cg-card-accent--green  { border-left-color: var(--cg-green); }
+.cg-card-accent--orange { border-left-color: var(--cg-orange); }
+
+
+/* ============================================================
+   5. Buttons
+   ============================================================ */
+
+.cg-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cg-space-xs);
+  padding: 4px 10px;
+  font-family: var(--cg-font);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--cg-cyan);
+  background: transparent;
+  border: 1px solid rgba(0, 255, 200, 0.33);
+  border-radius: var(--cg-radius-sharp);
+  cursor: pointer;
+  user-select: none;
+  transition: var(--cg-transition);
+}
+
+.cg-btn:hover {
+  background: rgba(0, 255, 200, 0.08);
+  border-color: rgba(0, 255, 200, 0.55);
+}
+
+.cg-btn--pink {
+  color: var(--cg-pink);
+  border-color: rgba(255, 0, 102, 0.33);
+}
+.cg-btn--pink:hover {
+  background: rgba(255, 0, 102, 0.08);
+  border-color: rgba(255, 0, 102, 0.55);
+}
+
+.cg-btn--green {
+  color: var(--cg-green);
+  border-color: rgba(0, 255, 65, 0.33);
+}
+.cg-btn--green:hover {
+  background: rgba(0, 255, 65, 0.08);
+  border-color: rgba(0, 255, 65, 0.55);
+}
+
+.cg-btn--orange {
+  color: var(--cg-orange);
+  border-color: rgba(255, 160, 0, 0.33);
+}
+.cg-btn--orange:hover {
+  background: rgba(255, 160, 0, 0.08);
+  border-color: rgba(255, 160, 0, 0.55);
+}
+
+.cg-btn--large {
+  padding: 14px 18px;
+  font-size: 12px;
+  border-radius: var(--cg-radius-lg);
+}
+
+.cg-btn--small {
+  padding: 2px 8px;
+  font-size: 9px;
+}
+
+
+/* ============================================================
+   6. Badges & Tags
+   ============================================================ */
+
+.cg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: var(--cg-radius-lg);
+}
+
+.cg-badge--support {
+  background: var(--cg-green);
+  color: #000;
+}
+
+.cg-badge--oppose {
+  background: var(--cg-pink);
+  color: #fff;
+}
+
+.cg-badge--unsure {
+  background: var(--cg-orange);
+  color: #000;
+}
+
+.cg-badge--mini {
+  padding: 0 4px;
+  font-size: 9px;
+}
+
+.cg-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 10px;
+  border: 1px solid rgba(0, 255, 200, 0.22);
+  border-radius: var(--cg-radius-pill);
+  color: var(--cg-cyan);
+}
+
+
+/* ============================================================
+   7. Tooltip
+   ============================================================ */
+
+.cg-tooltip {
+  position: absolute;
+  background: #0a0e1dee;
+  color: var(--cg-cyan);
+  font-family: var(--cg-font);
+  font-size: 12px;
+  padding: 10px 14px;
+  border: 1px solid rgba(0, 255, 200, 0.22);
+  border-radius: var(--cg-radius-sharp);
+  box-shadow: var(--cg-shadow);
+  max-width: 320px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+
+/* ============================================================
+   8. Legend / Info Overlay
+   ============================================================ */
+
+.cg-legend {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #0a0e1dcc;
+  padding: 14px 18px;
+  border: 1px solid rgba(0, 255, 200, 0.15);
+  border-radius: var(--cg-radius-sharp);
+  color: var(--cg-cyan);
+  font-size: 11px;
+}
+
+.cg-legend__title {
+  font-size: 9px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cg-pink);
+  margin-bottom: var(--cg-space-sm);
+}
+
+.cg-legend__divider {
+  border: none;
+  border-top: 1px solid rgba(0, 255, 200, 0.22);
+  margin: var(--cg-space-sm) 0;
+}
+
+
+/* ============================================================
+   9. Form Inputs
+   ============================================================ */
+
+.cg-input {
+  font-family: var(--cg-font);
+  font-size: 12px;
+  color: var(--cg-text);
+  background: var(--cg-bg);
+  border: 1px solid rgba(0, 255, 200, 0.22);
+  border-radius: var(--cg-radius-sm);
+  padding: var(--cg-space-sm) var(--cg-space-md);
+  outline: none;
+  transition: var(--cg-transition);
+}
+
+.cg-input:focus {
+  border-color: rgba(0, 255, 200, 0.55);
+  box-shadow: var(--cg-glow-cyan);
+}
+
+.cg-input::placeholder {
+  color: var(--cg-text-muted);
+}
+
+
+/* ============================================================
+   10. Collapsible Panels (layout helpers)
+   ============================================================ */
+
+.cg-collapsible {
+  overflow: hidden;
+  transition: width 0.3s ease, padding 0.3s ease, opacity 0.3s ease, border 0.3s ease;
+}
+
+.cg-collapsible--collapsed {
+  width: 0;
+  padding: 0;
+  opacity: 0;
+  border-color: transparent;
+}
+
+
+/* ============================================================
+   11. Scrollbar (Webkit)
+   ============================================================ */
+
+.cg-theme ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.cg-theme ::-webkit-scrollbar-track {
+  background: var(--cg-bg-deep);
+}
+
+.cg-theme ::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 200, 0.2);
+  border-radius: 3px;
+}
+
+.cg-theme ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 200, 0.35);
+}
+
+
+/* ============================================================
+   12. Animations
+   ============================================================ */
+
+@keyframes cg-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.cg-pulse {
+  animation: cg-pulse 1.5s infinite;
+}
+
+@keyframes cg-glow-breathe {
+  0%, 100% { box-shadow: 0 0 5px #00ffc822; }
+  50% { box-shadow: 0 0 20px #00ffc844; }
+}
+
+.cg-breathe {
+  animation: cg-glow-breathe 3s infinite ease-in-out;
+}
+
+
+/* ============================================================
+   13. HUD Corner Brackets (decorative)
+   ============================================================ */
+
+.cg-hud-corners {
+  position: relative;
+}
+
+.cg-hud-corners::before,
+.cg-hud-corners::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.cg-hud-corners::before {
+  top: 0; left: 0;
+  border-top: 2px solid rgba(0, 255, 200, 0.25);
+  border-left: 2px solid rgba(0, 255, 200, 0.25);
+}
+
+.cg-hud-corners::after {
+  top: 0; right: 0;
+  border-top: 2px solid rgba(255, 160, 0, 0.25);
+  border-right: 2px solid rgba(255, 160, 0, 0.25);
+}
+
+/* Bottom corners need a wrapper or extra element */
+.cg-hud-corners__bottom::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 16px; height: 16px;
+  border-bottom: 2px solid rgba(255, 0, 102, 0.25);
+  border-left: 2px solid rgba(255, 0, 102, 0.25);
+  pointer-events: none;
+}
+
+.cg-hud-corners__bottom::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 16px; height: 16px;
+  border-bottom: 2px solid rgba(255, 160, 0, 0.25);
+  border-right: 2px solid rgba(255, 160, 0, 0.25);
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   14. Utility: Opacity helpers
+   ============================================================ */
+
+.cg-opacity-90  { opacity: 0.9; }
+.cg-opacity-70  { opacity: 0.7; }
+.cg-opacity-50  { opacity: 0.5; }
+.cg-opacity-25  { opacity: 0.25; }
+.cg-opacity-15  { opacity: 0.15; }
+
+.cg-highlight    { opacity: 1; }
+.cg-deemphasize  { opacity: 0.15; }
